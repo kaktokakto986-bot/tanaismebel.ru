@@ -3,6 +3,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Танаис — тумбы, зеркала и раковины</title>
+<meta name="description" content="Танаис — тумбы, зеркала и раковины для ванной и спальни: яркие акценты, чистые линии и продуманные детали.">
+<meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="Танаис — тумбы, зеркала и раковины"><meta property="og:description" content="Каталог тумб, зеркал и раковин. Закажите прямо с сайта.">
+<meta name="theme-color" content="#ff5a3c">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fff8ee;--card:#ffffff;--ink:#1b2340;--mut:#5f6784;--ac:#ff5a3c;--ac2:#10b3a3;--ac3:#ffc233;--ln:#f6e4cc;--ph:#ffeccf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -171,6 +174,7 @@ html{scroll-behavior:smooth}
 .lg b{height:100px}
 #au{top:44px}
 @media(max-width:600px){.lg{font-size:30px;gap:10px;padding:14px 0}.lg b{height:66px}#au{top:30px}}
+</style>
 <style>
 /* ===== Посещаемость (только владельцам) ===== */
 #st:empty{display:none}
@@ -183,54 +187,43 @@ html{scroll-behavior:smooth}
 .bx{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:4px}
 @media(max-width:600px){.sk{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
-<style id="zfix">/* pro.js: кнопка связи с атрибутом hidden иначе остаётся видимой пустой плашкой */
-.fb [hidden]{display:none!important}</style>
-<style id="anim">
-/* ===== Плавные анимации (добавлено при объединении файлов) ===== */
-@keyframes zrise{from{opacity:0;transform:translateY(16px)}}
-@keyframes zpop{from{opacity:0;transform:translateY(14px) scale(.96)}}
-@keyframes zfade{from{opacity:0}}
-
-/* Появление блоков при прокрутке. Классы ставит скрипт: без него всё видно сразу */
-.rv0{transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.rv0:not(.rvin){opacity:0;transform:translateY(24px)}
-
-/* Лёгкий параллакс декоративных кругов в первом экране */
-.hero>.b1{translate:0 calc(var(--sy,0)*.12px)}
-.hero>.b2{translate:0 calc(var(--sy,0)*.2px)}
-.hero>.b3{translate:0 calc(var(--sy,0)*.08px)}
-
-/* Окно товара: сведения появляются по очереди */
-.mi>*{animation:zrise .6s cubic-bezier(.2,.7,.2,1) backwards}
-.mi>:nth-child(1){animation-delay:.14s}
-.mi>:nth-child(2){animation-delay:.2s}
-.mi>:nth-child(3){animation-delay:.26s}
-.mi>:nth-child(4){animation-delay:.32s}
-.mi>:nth-child(5){animation-delay:.38s}
-.mi>:nth-child(6){animation-delay:.44s}
-.mi>:nth-child(n+7){animation-delay:.5s}
-
-/* Фото в карточках чуть приближается при наведении */
-.im img{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.cd:hover .im img{transform:scale(1.05)}
-
-/* Политика конфиденциальности и уведомление о данных */
-#pp[open]{animation:zpop .4s cubic-bezier(.2,.7,.2,1)}
-#pp[open]::backdrop{animation:zfade .35s ease both}
-#ck.on{animation:zrise .7s cubic-bezier(.2,.7,.2,1) 1.2s backwards}
-
-/* Плавающие кнопки: появление, наведение, нажатие */
-html .fb a:not([hidden]){animation:zpop .6s cubic-bezier(.3,1.4,.5,1) .3s backwards}
-html .fb a{transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s}
-html .fb a:hover{transform:translateY(-3px);box-shadow:0 12px 24px -6px rgba(255,90,60,.7)}
-html .fb a:active{transform:scale(.95)}
-html .fb #up{transform:translateY(10px);transition:opacity .35s,transform .45s cubic-bezier(.2,.7,.2,1)}
-html .fb #up.on{transform:none}
-html .fb #up.on:hover{transform:translateY(-3px)}
-
-/* Ссылки в подвале */
-footer a{text-decoration:underline;text-decoration-color:var(--ln);text-underline-offset:4px;transition:color .3s,text-decoration-color .3s}
-footer a:hover{color:var(--ac);text-decoration-color:currentColor}
+<style>
+/* ===== Поиск, статусы, отзывы, FAQ ===== */
+#qb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+#qb input,#qb select{padding:10px 14px;border:2px solid var(--ln);border-radius:99px;background:var(--card);color:var(--ink);font:inherit;font-size:15px}
+#qs{flex:1 1 180px;min-width:0}#qm{width:110px}
+.bg{position:absolute;top:12px;left:12px;z-index:2;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:500;color:#fff;background:var(--ac)}
+.bg.stock{background:var(--ac2)}.bg.order{background:var(--ac3);color:#1b2340}
+.pr s{color:var(--mut);font-size:.72em;font-weight:400;margin-right:6px}
+.cd .row{margin-top:6px}.cd .row select,.cd .row input{width:100%;padding:8px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:13px}
+#wk,#fq{margin-top:44px}#fq details{border-bottom:1px solid var(--ln);padding:12px 0}#fq summary{cursor:pointer;font-weight:500}
+.wr{display:flex;gap:12px;overflow-x:auto;padding:8px 0}.wr figure{margin:0;flex:0 0 220px}.wr img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;border:2px solid var(--ln)}
+.rv{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:10px 0}.rv blockquote{margin:0;background:var(--card);border:2px solid var(--ln);border-radius:20px;padding:16px}.rv cite{color:var(--mut);font-size:14px}
+#tt{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));translate:-50% 20px;opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;z-index:200;transition:.3s}
+#tt.on{opacity:1;translate:-50% 0}
+</style>
+<style>
+/* ===== Дополнительные плавные анимации ===== */
+@keyframes pop{from{opacity:0;transform:scale(.5)}}
+@keyframes gr{from{transform:scaleY(0)}}
+#au{animation:fi .9s .25s both}
+#qb input,#qb select{transition:border-color .25s,box-shadow .25s,transform .25s}
+#qb input:focus,#qb select:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px rgba(255,90,60,.18);transform:translateY(-1px)}
+.bg{animation:pop .5s cubic-bezier(.3,1.5,.5,1) .25s backwards}
+.sk div{transition:transform .25s,box-shadow .25s}.sk div:hover{transform:translateY(-3px);box-shadow:0 10px 22px -12px rgba(255,90,60,.5)}
+.bars i{transform-origin:bottom;animation:gr .8s cubic-bezier(.2,.8,.2,1) backwards;transition:filter .2s}.bars i:hover{filter:brightness(1.2)}
+.bars i:nth-child(2n){animation-delay:.05s}.bars i:nth-child(3n){animation-delay:.1s}
+.rv blockquote,.wr figure{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.rv blockquote:hover{transform:translateY(-4px);box-shadow:0 14px 28px -14px rgba(255,90,60,.4)}
+.wr figure{overflow:hidden;border-radius:18px}.wr img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}.wr figure:hover img{transform:scale(1.07)}
+#fq details{transition:background-color .3s}#fq details[open]{background:rgba(255,90,60,.05)}
+#fq details[open] p{animation:up .45s cubic-bezier(.2,.7,.2,1) both}
+.rvl{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.rvl.in{opacity:1;transform:none}
+#ck.on{animation:up .6s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.fb{animation:fi .6s 1s backwards}.fb a,.fb button{transition:transform .25s cubic-bezier(.3,1.4,.5,1)}.fb a:hover,.fb button:hover{transform:translateY(-3px)}.fb a:active,.fb button:active{transform:scale(.94)}
+#pp[open]{animation:up .4s cubic-bezier(.2,.7,.2,1) both}#pp[open]::backdrop{animation:fi .3s both}
+.th{transition:opacity .2s,border-color .2s,transform .25s cubic-bezier(.3,1.4,.5,1)}.th:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.rvl{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -266,7 +259,7 @@ function lk(c){c=(c||'').trim();if(!c)return'';if(c[0]=='@')return'https://t.me/
 function card(i){const p=i.price?i.price.toLocaleString('ru-RU')+' ₽':'Цена по запросу',l=lk(contact);
 return `<article class="cd" data-id="${esc(i.id)}"><div class="im ${i.cat}" tabindex="0" role="button" aria-label="Подробнее: ${esc(i.name)}">${i.img?`<img src="${i.img}" alt="${esc(i.name)}" loading="lazy">`:ill(i.cat)}</div><div class="bd"><div class="ct ${i.cat}">${C[i.cat]}</div><h3 class="nm">${esc(i.name)}</h3><p class="ds">${esc(i.desc)}</p><div class="pr">${p}</div>${l?`<a class="b" href="${esc(l)}">Заказать</a>`:''}${own?`<button class="b g" data-act="edit" data-id="${i.id}">Редактировать</button><button class="b g" data-act="del" data-id="${i.id}">Удалить</button>`:''}</div></article>`}
 function rc(){$('#fl').innerHTML=[['all','Все'],...Object.entries(C)].map(([k,v])=>`<button class="pl${f==k?' on':''}" data-act="flt" data-v="${k}">${v}</button>`).join('');
-const L=items.filter(i=>f=='all'||i.cat==f);
+const L=(window.qf||(x=>x))(items.filter(i=>f=='all'||i.cat==f));
 $('#gr').innerHTML=L.length?L.map(card).join(''):'<p class="ds">Здесь пока пусто — скоро появятся новые позиции.</p>';
 $('#ft').textContent=contact?'Заказ и вопросы: '+contact:(db?'':'Сервер не подключён');
 const g=$('#mg');if(g)g.innerHTML=(own&&!items.length&&LG.items.length)?'<button class="b g" data-act="mig">Перенести товары из файла на сервер</button>':'';
@@ -404,7 +397,81 @@ draw()};
 </script>
 
 <script>
-/* Танаис — профессиональные дополнения: значок сайта, «О нас и контакты», политика, плавающие кнопки, микроразметка. Раньше подключались файлом pro.js */
+/* Доп. функции: поиск, статусы, ссылки на товар, просмотры товаров, FAQ, отзывы, фото работ, Метрика */
+(function(){
+const YM=0; /* номер счётчика Яндекс Метрики; 0 — выключено */
+if(YM){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};k=e.createElement(t);a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,D,'script','https://mc.yandex.ru/metrika/tag.js','ym');ym(YM,'init',{clickmap:true,trackLinks:true,accurateTrackBounce:true})}
+const nf=x=>(x||0).toLocaleString('ru-RU'),ST={stock:'В наличии',order:'Под заказ',hit:'Хит'},
+link=id=>location.origin+location.pathname+'#p-'+id;
+const tt=D.createElement('div');tt.id='tt';D.body.appendChild(tt);let tm;
+const toast=t=>{tt.textContent=t;tt.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>tt.classList.remove('on'),2600)},
+bad=x=>toast('Не удалось: '+(x.code||x.message));
+/* поиск, сортировка, фильтр по цене */
+const Q={s:'',max:0,o:''};
+window.qf=l=>{let r=l.filter(i=>(!Q.s||(i.name+' '+(i.desc||'')).toLowerCase().includes(Q.s))&&(!Q.max||(i.price||0)<=Q.max));
+if(Q.o)r=r.slice().sort((a,b)=>Q.o=='a'?(a.price||0)-(b.price||0):(b.price||0)-(a.price||0));return r};
+const qb=D.createElement('div');qb.id='qb';
+qb.innerHTML='<input id="qs" type="search" placeholder="Поиск по названию" aria-label="Поиск"><select id="qo" aria-label="Сортировка"><option value="">По новизне</option><option value="a">Сначала дешевле</option><option value="d">Сначала дороже</option></select><input id="qm" type="number" min="0" placeholder="До, ₽" aria-label="Максимальная цена">';
+$('#gr').before(qb);
+qb.addEventListener('input',()=>{Q.s=$('#qs').value.trim().toLowerCase();Q.o=$('#qo').value;Q.max=+$('#qm').value||0;rc()});
+/* метки статуса и старая цена; у владельца — поля для их изменения */
+const c0=card;
+card=function(i){let h=c0(i);
+if(i.st&&ST[i.st])h=h.replace('</div><div class="bd">','<span class="bg '+i.st+'">'+ST[i.st]+'</span></div><div class="bd">');
+if(i.price&&i.old>i.price)h=h.replace('<div class="pr">','<div class="pr"><s>'+nf(i.old)+' ₽</s> ');
+if(own){const q='</div></article>',id=esc(i.id);h=h.slice(0,-q.length)+'<div class="row"><select data-q="st" data-id="'+id+'" aria-label="Статус">'+[['','Без метки'],...Object.entries(ST)].map(([k,v])=>'<option value="'+k+'"'+(k==(i.st||'')?' selected':'')+'>'+v+'</option>').join('')+'</select><input data-q="old" data-id="'+id+'" type="number" min="0" placeholder="Старая цена" value="'+esc(i.old||'')+'"></div>'+q}
+return h};
+D.addEventListener('change',async e=>{const t=e.target;if(!own||!db)return;
+if(t.dataset&&t.dataset.q){db.collection('items').doc(t.dataset.id).update({[t.dataset.q]:t.dataset.q=='old'?(+t.value||0):t.value}).then(()=>toast('Сохранено')).catch(bad)}
+else if(t.id=='wf'&&t.files[0]){try{await db.collection('settings').add({kind:'work',img:await pic(t.files[0],900,.72),t:Date.now()});toast('Фото добавлено')}catch(x){bad(x)}t.value=''}});
+/* «Заказать» с готовым сообщением, ссылка на товар, отзывы */
+let LI=null;
+D.addEventListener('click',e=>{
+const c=e.target.closest('.cd[data-id],[data-act=edit]');if(c)LI=c.dataset.id;
+const a=e.target.closest('a.b');
+if(a&&/^Заказать/.test(a.textContent)){a.dataset.h=a.dataset.h||a.getAttribute('href');
+if(!/^tel:/.test(a.dataset.h)){const cd=a.closest('.cd'),id=cd?cd.dataset.id:LI,nm=cd?cd.querySelector('.nm').textContent:(($('#mt')||{}).textContent||''),tx='Здравствуйте! Хочу заказать: '+nm+(id?' '+link(id):'');
+if(/^mailto:/.test(a.dataset.h))a.href=a.dataset.h+'?subject='+encodeURIComponent('Заказ: '+nm)+'&body='+encodeURIComponent(tx);
+else{try{navigator.clipboard.writeText(tx)}catch(x){}toast('Текст заказа скопирован — вставьте его в чат')}}}
+if(e.target.closest('[data-sh]')&&LI){const u=link(LI);if(navigator.share)navigator.share({title:D.title,url:u}).catch(()=>{});else{try{navigator.clipboard.writeText(u)}catch(x){}toast('Ссылка скопирована')}}
+const w=e.target.closest('[data-w]');
+if(w&&own&&db){const k=w.dataset.w;
+if(k=='add'){const name=prompt('Имя клиента'),text=name&&prompt('Текст отзыва');if(name&&text)db.collection('settings').add({kind:'review',name:name.trim(),text:text.trim(),t:Date.now()}).catch(bad)}
+else if(confirm('Удалить?'))db.collection('settings').doc(k).delete().catch(bad)}},true);
+/* просмотры товаров */
+function pv(id){if(!id||own||!db)return;const k='pv'+id;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,1)}catch(x){return}
+const inc=firebase.firestore.FieldValue.increment;db.doc('stats/p'+id).set({d:'0p',n:inc(1),u:inc(0)},{merge:true}).catch(()=>{})}
+const mo=$('#mo');
+new MutationObserver(()=>{if(mo.classList.contains('on')){const i=$('.mi');
+if(i&&!i.querySelector('[data-sh]')){const b=D.createElement('button');b.type='button';b.className='b g';b.dataset.sh=1;b.textContent='Поделиться ссылкой';i.appendChild(b)}
+if(LI){history.replaceState(null,'','#p-'+LI);pv(LI)}}
+else if(/^#p-/.test(location.hash))history.replaceState(null,'',location.pathname+location.search)}).observe(mo,{attributes:true,attributeFilter:['class'],childList:true,subtree:true});
+/* открытие товара по ссылке #p-... */
+let hp=(location.hash.match(/^#p-([\w-]+)$/)||[])[1];
+const rc0=rc;rc=function(){rc0();if(hp){const c=$('.cd[data-id="'+hp+'"]');if(c){hp=null;c.click()}}};
+/* блоки: работы, отзывы, FAQ */
+const sec=D.createElement('div');
+sec.innerHTML='<section id="wk"></section><section id="fq"><h2 class="nm">Доставка, оплата, гарантия</h2>'+[['Как заказать','Нажмите «Заказать» на карточке товара — откроется чат или почта с готовым сообщением.'],['Доставка','Условия и сроки зависят от товара и города — уточняйте при заказе.'],['Оплата','Способ оплаты согласуем при оформлении заказа.'],['Гарантия','Условия гарантии и срок уточняйте у продавца при заказе.']].map(x=>'<details><summary>'+x[0]+'</summary><p class="ds">'+x[1]+'</p></details>').join('')+'</section>';
+$('footer').before(sec);
+let W=[];
+function rw(){const x=$('#wk');if(!x)return;const o=k=>W.filter(i=>i.kind==k).sort((a,b)=>b.t-a.t),ws=o('work'),rv=o('review'),dl=i=>own?'<button type="button" class="b g" data-w="'+esc(i.id)+'">Удалить</button>':'';
+x.innerHTML=(ws.length||own?'<h2 class="nm">Наши работы</h2><div class="wr">'+ws.map(i=>'<figure><img src="'+esc(i.img)+'" alt="Готовая работа" loading="lazy">'+dl(i)+'</figure>').join('')+'</div>'+(own?'<input id="wf" type="file" accept="image/*">':''):'')
++(rv.length||own?'<h2 class="nm">Отзывы</h2><div class="rv">'+rv.map(i=>'<blockquote><p>'+esc(i.text)+'</p><cite>— '+esc(i.name)+'</cite>'+dl(i)+'</blockquote>').join('')+'</div>'+(own?'<button type="button" class="b g" data-w="add">+ Добавить отзыв</button>':''):'')}
+if(db)db.collection('settings').onSnapshot(s=>{W=s.docs.map(d=>({id:d.id,...d.data()}));rw()},()=>{});
+/* владельцу: популярные товары */
+let pu=null,PV=[],PE='';
+function dp(){const x=$('#sp');if(!x)return;x.innerHTML='<h3 class="sh">Популярные товары</h3>'+(PE?'<p class="ds">'+esc(PE)+'</p>':PV.length?PV.map(([id,n])=>{const it=items.find(i=>i.id==id);return'<div class="sr"><span>'+esc(it?it.name:'Товар удалён')+'</span><b>'+nf(n)+'</b></div>'}).join(''):'<p class="ds">Пока нет просмотров товаров. Откройте любой товар без входа в аккаунт — например, в режиме инкогнито.</p>')}
+function ps(){const b=$('#st');
+if(!own||!db){if(pu){pu();pu=null}PV=[];const x=$('#sp');if(x)x.remove();return}
+if(!$('#sp')&&b){const x=D.createElement('div');x.id='sp';b.after(x)}
+if(!pu)pu=db.collection('stats').where('d','==','0p').onSnapshot(s=>{PE='';PV=s.docs.map(d=>[d.id.slice(1),d.data().n||0]).sort((a,b)=>b[1]-a[1]).slice(0,5);dp()},e=>{PE='Нет доступа к статистике товаров ('+(e.code||e.message)+')';dp()});
+dp()}
+const r0=window.rs;window.rs=function(){r0&&r0();ps();rw();rc()};
+})();
+</script>
+
+<script>
+/* ===== Танаис — профессиональные дополнения (бывший pro.js) ===== */
 (function(){
 const BT=D.title,SK=D.createElement('style');
 SK.textContent='#qb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}#st:empty{display:none}'
@@ -450,17 +517,11 @@ addEventListener('scroll',()=>{const u=$('#up');if(u)u.classList.toggle('on',scr
 rc();
 })();
 </script>
-
 <script>
-/* ===== Плавные анимации: появление блоков при прокрутке и лёгкий параллакс ===== */
-(function(){
-if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-if('IntersectionObserver' in window){
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('rvin');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4% 0px'});
-['.mq','#fl','#wk','#fq','#cx','footer'].forEach(s=>{const el=$(s);if(el){el.classList.add('rv0');io.observe(el)}})}
-const hero=$('.hero');
-if(hero){let busy=0;const set=()=>{busy=0;hero.style.setProperty('--sy',Math.min(scrollY,900))};
-addEventListener('scroll',()=>{if(!busy)busy=requestAnimationFrame(set)},{passive:true});set()}
-})();
+/* плавное появление блоков при прокрутке */
+(function(){if(!window.IntersectionObserver)return;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('#wk,#fq,#cx,footer').forEach(el=>{el.classList.add('rvl');io.observe(el)})})();
 </script>
+
 </body></html>
