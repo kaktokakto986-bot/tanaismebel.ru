@@ -225,6 +225,27 @@ html{scroll-behavior:smooth}
 .th{transition:opacity .2s,border-color .2s,transform .25s cubic-bezier(.3,1.4,.5,1)}.th:hover{transform:translateY(-2px)}
 @media(prefers-reduced-motion:reduce){.rvl{opacity:1;transform:none}}
 </style>
+<style>
+/* ===== Настройки, избранное, заявки, этапы, тема ===== */
+#bn{display:none}#bn.on{display:block;text-align:center;padding:9px 16px;font-size:14px;font-weight:500;background:linear-gradient(90deg,var(--ac),var(--ac3));color:#1b2340;animation:up .6s both}
+#tb{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:90;width:44px;height:44px;border-radius:50%;border:2px solid var(--ln);background:var(--card);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.4);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}#tb:hover{transform:rotate(20deg) scale(1.08)}
+.hr{position:absolute;top:10px;right:10px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#e8442a;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .25s cubic-bezier(.3,1.5,.5,1)}.hr:hover{transform:scale(1.12)}.hr.on{animation:pop .4s cubic-bezier(.3,1.5,.5,1)}
+#qsh{display:none}
+#hw,#rf{margin-top:44px}
+.hs{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.hs li{display:flex;gap:12px;background:var(--card);border:2px solid var(--ln);border-radius:20px;padding:14px;transition:transform .3s,box-shadow .3s}.hs li:hover{transform:translateY(-3px);box-shadow:0 14px 28px -14px rgba(255,90,60,.4)}
+.hs b{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--ac),var(--ac3));color:#fff;font-weight:600}
+.hs h3{margin:0;font:600 20px 'Cormorant Garamond',Georgia,serif}.hs p{margin:2px 0 0}
+#rf input,#rf textarea{width:100%;padding:12px;border:2px solid var(--ln);border-radius:14px;background:var(--card);color:var(--ink);font:inherit;margin-bottom:10px}
+#rf input:focus,#rf textarea:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px rgba(255,90,60,.18)}
+#rf .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:600px){#rf .g2{grid-template-columns:1fr}}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.rq{border-bottom:1px solid var(--ln);padding:10px 0}.rq a{color:var(--ac)}
+#sg input[type=checkbox]{width:auto}#sgP{display:flex;gap:8px;flex-wrap:wrap}
+#sgP button{width:34px;height:34px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:transform .2s}#sgP button.on{border-color:var(--ink);transform:scale(1.15)}
+.sm{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+body.ck #tb{display:none}
+</style>
 </head>
 <body>
 <div id="ab" role="status"></div>
@@ -518,10 +539,73 @@ rc();
 })();
 </script>
 <script>
+/* Настройки сайта, избранное, похожие товары, этапы работы, заявки, тема */
+(function(){
+const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}},
+tt=m=>{const x=$('#tt');if(x){x.textContent=m;x.classList.add('on');clearTimeout(window._tm);window._tm=setTimeout(()=>x.classList.remove('on'),2600)}},
+R=D.documentElement,PAL={'Коралл':['#ff5a3c','#ff7a5c'],'Бирюза':['#10b3a3','#2fd3c1'],'Фиолет':['#7c5cff','#9b82ff'],'Зелёный':['#22a559','#3ecf79'],'Синий':['#2f6bff','#5b8cff']};
+let S={};
+/* светлая / тёмная тема */
+const tb=D.createElement('button');tb.id='tb';tb.type='button';D.body.appendChild(tb);
+function accent(){const p=PAL[S.acc];if(p)R.style.setProperty('--ac',R.dataset.theme=='dark'?p[1]:p[0]);else R.style.removeProperty('--ac')}
+function theme(t){R.dataset.theme=t;R.style.colorScheme=t;LS('tth',t);tb.textContent=t=='dark'?'☀':'☾';tb.setAttribute('aria-label',t=='dark'?'Светлая тема':'Тёмная тема');accent()}
+tb.onclick=()=>theme(R.dataset.theme=='dark'?'light':'dark');theme(LS('tth')||'dark');
+/* баннер и тексты главного экрана из настроек */
+const bn=D.createElement('div');bn.id='bn';bn.setAttribute('role','status');D.body.insertBefore(bn,$('.w'));
+function apply(){const h1=$('.hero h1'),sb=$('.hero .sub'),bt=$('.hero .hb a'),on=S.bnOn&&S.bnT;
+if(S.hT)h1.innerHTML=esc(S.hT).replace(/\*(.+?)\*/g,'<em>$1</em>');if(S.hS)sb.textContent=S.hS;if(S.hB)bt.textContent=S.hB;
+bn.textContent=on?S.bnT:'';bn.className=on?'on':'';accent()}
+if(db)db.doc('settings/site').onSnapshot(s=>{S=s.data()||{};apply()},()=>{});
+/* избранное */
+let FV=new Set((LS('fav')||'').split(',').filter(Boolean)),FO=false;
+const q0=window.qf;window.qf=l=>{l=q0?q0(l):l;return FO?l.filter(i=>FV.has(i.id)):l};
+const c1=card;card=function(i){const on=FV.has(i.id);return c1(i).replace('</div><div class="bd">','<button type="button" class="hr'+(on?' on':'')+'" data-fv="'+esc(i.id)+'" aria-label="В избранное">'+(on?'♥':'♡')+'</button></div><div class="bd">')};
+$('#qb').insertAdjacentHTML('beforeend','<button type="button" id="qf" class="pl"></button><button type="button" id="qsh" class="pl">Отправить подборку</button>');
+function cnt(){const n=items.filter(i=>FV.has(i.id)).length,q=$('#qf');q.textContent='♥ Избранное'+(n?' ('+n+')':'');q.classList.toggle('on',FO);$('#qsh').style.display=FO&&n?'inline-block':'none'}
+const rc1=rc;rc=function(){rc1();cnt()};
+/* заявка по размерам, этапы работы */
+const hw=D.createElement('div');
+hw.innerHTML='<section id="hw"><h2 class="nm">Как мы работаем</h2><ol class="hs">'+[['Заявка','Выберите товар или опишите, что нужно: через «Заказать» или форму ниже.'],['Согласование','Уточняем размеры, цвет, материалы и сроки.'],['Изготовление','Готовим заказ или подбираем из наличия.'],['Доставка','Договариваемся об удобном способе и времени.']].map((x,i)=>'<li><b>'+(i+1)+'</b><div><h3>'+x[0]+'</h3><p class="ds">'+x[1]+'</p></div></li>').join('')+'</ol></section><section id="rf"><h2 class="nm">Заказать по своим размерам</h2><p class="ds">Оставьте контакт и опишите, что нужно: размеры, цвет, пожелания. Мы свяжемся с вами.</p><div class="g2"><input id="rfN" placeholder="Имя" autocomplete="name"><input id="rfP" type="tel" placeholder="Телефон" autocomplete="tel"></div><textarea id="rfT" rows="3" placeholder="Что нужно, размеры, пожелания"></textarea><input id="rfH" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="button" class="b" data-rf="1">Отправить заявку</button><p class="ds" id="rfM" role="status"></p></section>';
+$('#wk').before(hw);
+const rm=m=>$('#rfM').textContent=m;
+/* похожие товары в окне */
+const mo=$('#mo');
+new MutationObserver(()=>{if(!mo.classList.contains('on'))return;const m=$('.mi'),nm=$('#mt');if(!m||!nm||m.querySelector('.sm'))return;
+const i=items.find(x=>x.name==nm.textContent);if(!i)return;const L=items.filter(x=>x.cat==i.cat&&x.id!=i.id).slice(0,3);if(!L.length)return;
+const d=D.createElement('div');d.className='sm';d.innerHTML='<h3 class="sh">Похожие товары</h3>'+L.map(x=>'<button type="button" class="b g" data-sim="'+esc(x.id)+'">'+esc(x.name)+'</button>').join('');m.appendChild(d)}).observe(mo,{childList:true,subtree:true});
+/* клики */
+D.addEventListener('click',e=>{const T=e.target,v=T.closest('[data-fv]');
+if(v){const id=v.dataset.fv;FV.has(id)?FV.delete(id):FV.add(id);LS('fav',[...FV].join(','));const on=FV.has(id);v.classList.toggle('on',on);v.textContent=on?'♥':'♡';cnt();if(FO)rc();return}
+if(T.closest('#qf')){FO=!FO;rc();return}
+if(T.closest('#qsh')){const tx='Моя подборка из «Танаис»:\n'+items.filter(i=>FV.has(i.id)).map(i=>i.name+(i.price?' — '+i.price.toLocaleString('ru-RU')+' ₽':'')+'\n'+location.origin+location.pathname+'#p-'+i.id).join('\n');
+if(navigator.share)navigator.share({text:tx}).catch(()=>{});else{try{navigator.clipboard.writeText(tx)}catch(x){}tt('Подборка скопирована')}return}
+const sm=T.closest('[data-sim]');if(sm){const id=sm.dataset.sim;$('.mx').click();const c=$('.cd[data-id="'+id+'"]');if(c)c.click();else tt('Товар скрыт фильтром или поиском');return}
+if(T.closest('[data-rf]')){const n=$('#rfN').value.trim(),p=$('#rfP').value.trim(),x=$('#rfT').value.trim();
+if($('#rfH').value)return;if(!n||p.replace(/\D/g,'').length<6)return rm('Укажите имя и телефон');if(!db)return rm('Сервер не подключён');
+if(LS('rfT')&&Date.now()-LS('rfT')<6e4)return rm('Заявка уже отправлена, подождите минуту');
+db.collection('requests').add({name:n.slice(0,100),phone:p.slice(0,40),text:x.slice(0,1000),t:Date.now()}).then(()=>{LS('rfT',Date.now());['rfN','rfP','rfT'].forEach(k=>$('#'+k).value='');rm('Спасибо! Заявка отправлена, мы свяжемся с вами.')}).catch(()=>rm('Не удалось отправить. Напишите нам через кнопку «Заказать».'));return}
+const rd=T.closest('[data-rd]');if(rd&&own&&confirm('Удалить заявку?'))db.collection('requests').doc(rd.dataset.rd).delete().catch(()=>{});
+const pl=T.closest('[data-pl]');if(pl){S.acc=pl.dataset.pl;accent();D.querySelectorAll('[data-pl]').forEach(b=>b.classList.toggle('on',b===pl))}
+if(T.closest('[data-sg]')&&own&&db){const g=k=>$('#'+k).value.trim();
+db.doc('settings/site').set({bnT:g('sgB'),bnOn:$('#sgO').checked,hT:g('sgH'),hS:g('sgS'),hB:g('sgT'),acc:S.acc||''},{merge:true}).then(()=>tt('Настройки сохранены')).catch(x=>tt('Не удалось: '+(x.code||x.message)))}});
+/* владельцу: заявки и настройки сайта */
+let ru_=null,RQ=[];
+function dq(){const x=$('#rq');if(!x)return;x.innerHTML='<h3 class="sh">Заявки'+(RQ&&RQ.length?' ('+RQ.length+')':'')+'</h3>'+(RQ===null?'<p class="ds">Нет доступа к заявкам: добавьте правило для requests в Firestore.</p>':RQ.length?RQ.map(r=>'<div class="rq"><b>'+esc(r.name)+'</b> · <a href="tel:'+esc(String(r.phone).replace(/[^\d+]/g,''))+'">'+esc(r.phone)+'</a><div class="ds">'+esc(r.text||'без описания')+'</div><div class="ds">'+new Date(r.t).toLocaleString('ru-RU')+' <button type="button" class="b g" data-rd="'+esc(r.id)+'">Удалить</button></div></div>').join(''):'<p class="ds">Пока заявок нет.</p>')}
+function rq(){let x=$('#rq');if(!own||!db){if(ru_){ru_();ru_=null}RQ=[];if(x)x.remove();return}
+if(!x&&$('#ad')){x=D.createElement('div');x.id='rq';($('#sp')||$('#st')).after(x)}
+if(!ru_)ru_=db.collection('requests').orderBy('t','desc').limit(20).onSnapshot(s=>{RQ=s.docs.map(d=>({id:d.id,...d.data()}));dq()},()=>{RQ=null;dq()});dq()}
+function stg(){let x=$('#sg');if(!own||!db){if(x)x.remove();return}
+if(x||!$('#ad'))return;x=D.createElement('details');x.id='sg';x.className='oe';
+x.innerHTML='<summary>Настройки сайта · владелец</summary><div class="ad"><input id="sgB" placeholder="Текст баннера, например: Скидка 10% до воскресенья" value="'+esc(S.bnT||'')+'"><label class="ds"><input type="checkbox" id="sgO"'+(S.bnOn?' checked':'')+'> Показывать баннер</label><input id="sgH" placeholder="Заголовок (слово в *звёздочках* будет цветным)" value="'+esc(S.hT||'')+'"><input id="sgS" placeholder="Подзаголовок" value="'+esc(S.hS||'')+'"><input id="sgT" placeholder="Текст кнопки" value="'+esc(S.hB||'')+'"><div class="ds">Акцентный цвет</div><div id="sgP">'+Object.entries(PAL).map(([k,c])=>'<button type="button" data-pl="'+k+'" title="'+k+'" aria-label="'+k+'" style="background:'+c[0]+'"'+(S.acc==k?' class="on"':'')+'></button>').join('')+'</div><button class="b" type="button" data-sg="1">Сохранить настройки</button></div>';
+($('#rq')||$('#sp')||$('#st')).after(x)}
+const r1=window.rs;window.rs=function(){r1&&r1();rq();stg()};
+})();
+</script>
+<script>
 /* плавное появление блоков при прокрутке */
 (function(){if(!window.IntersectionObserver)return;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
-document.querySelectorAll('#wk,#fq,#cx,footer').forEach(el=>{el.classList.add('rvl');io.observe(el)})})();
+document.querySelectorAll('#hw,#rf,#wk,#fq,#cx,footer').forEach(el=>{el.classList.add('rvl');io.observe(el)})})();
 </script>
 
 </body></html>
